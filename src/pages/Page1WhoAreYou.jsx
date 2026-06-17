@@ -1,15 +1,20 @@
 import { useState } from 'react'
 import Card from '../components/Card.jsx'
 
-const ANSWER = 'stupid cute little kat'
+const ANSWER = 'silly little kat'
 
 const WRONG_MESSAGES = [
-  'wrong answer! try again!',
-  "let me give you a hint: the answer contains 'stupid', 'little', 'cute'",
-  'awwww, the answer is still wrong, you stupid little kat <3',
-  'alright, let me tell you the answer: "stupid cute little kat"',
+  'Not what I want! try again!',
+  "Let me give you a hint: 你是一個笨蛋小貓",
+  'Awwww, the answer is still wrong, you silly little kat! try again',
+  'I think it\' too hard for you, the answer is "silly little kat" :)',
 ]
 
+// .trim() removes whitespace from both ends of a string
+// .toLowerCase() converts the string to lowercase
+// .replace(/\s+/g, ' ') replaces multiple whitespace characters with a single space
+// \s: matches any whitespace character (spaces, tabs, line breaks)
+// /g: global flag, meaning it will replace all occurrences in the 
 const normalize = (s) => s.trim().toLowerCase().replace(/\s+/g, ' ')
 
 export default function Page1WhoAreYou({ onAdvance }) {
@@ -32,7 +37,7 @@ export default function Page1WhoAreYou({ onAdvance }) {
 
   return (
     <section className="page">
-      <h1 className="page-title">who are you? 🐱</h1>
+      <h1 className="page-title">Who are you? 🐱</h1>
       <form className="input-row" onSubmit={submit}>
         <input
           className="cute-input"
@@ -40,6 +45,7 @@ export default function Page1WhoAreYou({ onAdvance }) {
           value={value}
           autoFocus
           placeholder="type your answer here..."
+          // `.target` will give you the element that triggered the event
           onChange={(e) => setValue(e.target.value)}
         />
         <button className="btn" type="submit">
@@ -51,7 +57,7 @@ export default function Page1WhoAreYou({ onAdvance }) {
       {solved && (
         <Card
           emoji="🎉"
-          text="congrats, you passed! welcome to the next page!"
+          text="Congrats, you passed! Welcome to the next page!"
           onContinue={onAdvance}
         />
       )}
