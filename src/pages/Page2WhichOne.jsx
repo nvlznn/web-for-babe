@@ -91,7 +91,7 @@ export default function Page2WhichOne({ onAdvance }) {
       {nudge && <p className="feedback">{nudge}</p>}
 
       <button className="btn" onClick={check}>
-        this is me! 💗
+        this is me!
       </button>
 
       {solved && (

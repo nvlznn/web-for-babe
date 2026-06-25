@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import Card from '../components/Card.jsx'
 
-const ANSWER = 'silly little kat'
+const ANSWER = 'dumb little kat'
 
 const WRONG_MESSAGES = [
   'Not what I want! Try again!',
   "Let me give you a hint: 你是一個笨蛋小貓",
-  'You stupid, the answer is still wrong, you ARE a silly little kat! Try again',
-  'I think it\'s too hard for you, the answer is "silly little kat" :)',
+  'You stupid, the answer is still wrong, you ARE a dumb little kat! Try again',
+  'I think it\'s too hard for you, the answer is "dumb little kat" :)',
 ]
 
 // .trim() removes whitespace from both ends of a string

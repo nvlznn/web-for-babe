@@ -498,10 +498,12 @@ h3 {
 }
 .walking-cat {
   position: absolute;
+  left: 0;
   width: 92px;
   height: auto;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  animation-fill-mode: both;
 }
 @keyframes catAcross {
   0% {

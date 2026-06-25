@@ -2,7 +2,17 @@ import { useMemo } from 'react'
 
 const FLOWERS = ['🌸', '🌷', '🌺', '💐', '🌹', '🏵️']
 const HEARTS = ['💗', '💕', '💖', '💓', '🩷', '❤️']
-const MOVING_CATS = ['dance-gif.gif', 'mimi-gif.gif', 'lick-gif.gif']
+const MOVING_CATS = [
+  'angry-gif.gif',
+  'dance-gif.gif',
+  'eat-gif.gif',
+  'evil-gif.gif',
+  'kill.png',
+  'lick-gif.gif',
+  'mi-u.png',
+  'mimi-gif.gif',
+  'stupid-gif.gif',
+]
 
 export default function Page5Ending() {
   // pre-compute random decorations once
@@ -78,7 +88,8 @@ export default function Page5Ending() {
         <img src="/materials/us.JPG" alt="us together 💗" />
       </div>
 
-      <p className="page-sub">Forever &amp; always, your stupid cute little kat &amp; her Ino 🐱💍</p>
+      <p className="page-sub">Web for Kat by Ino (2026)</p>
+
     </section>
   )
 }
