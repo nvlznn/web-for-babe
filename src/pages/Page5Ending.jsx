@@ -85,7 +85,7 @@ export default function Page5Ending() {
       <h1 className="page-title ending-title">Yeah! Babe I love you &lt;3</h1>
 
       <div className="us-frame">
-        <img src="/materials/us.JPG" alt="us together 💗" />
+        <img src="/materials/us2.JPG" alt="cute pic" />
       </div>
 
       <p className="page-sub">Web for Kat by Ino (2026)</p>
