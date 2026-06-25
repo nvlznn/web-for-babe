@@ -49,7 +49,7 @@ export default function Page1WhoAreYou({ onAdvance }) {
           onChange={(e) => setValue(e.target.value)}
         />
         <button className="btn" type="submit">
-          Submit 💗
+          Submit
         </button>
       </form>
       {feedback && <p className="feedback">{feedback}</p>}
