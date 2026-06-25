@@ -5,7 +5,7 @@ export default function Card({ emoji = '🐱', text, buttonText = 'continue', on
       <div className="card">
         <div className="card-emoji">{emoji}</div>
         <div className="card-text">{text}</div>
-        <button className="btn" onClick={onContinue}>
+        <button className="btn" onClick={onContinue} autoFocus>
           {buttonText}
         </button>
       </div>

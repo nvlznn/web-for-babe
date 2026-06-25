@@ -8,6 +8,12 @@ export default function Page4Perfect({ onAdvance }) {
   const offsetRef = useRef({ x: 0, y: 0 })
   const lastCursorRef = useRef({ x: null, y: null })
 
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Enter') onAdvance() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onAdvance])
+
   // spring: every frame, pull the button 3% closer to origin
   useEffect(() => {
     let raf

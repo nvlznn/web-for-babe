@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Card from '../components/Card.jsx'
 
 const CATS = [
@@ -43,6 +43,14 @@ export default function Page2WhichOne({ onAdvance }) {
       setNudge('Not quite! Pick ALL of them, every single stupid cat 🐱')
     }
   }
+
+  const checkRef = useRef(null)
+  checkRef.current = check
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Enter') checkRef.current() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <section className="page">

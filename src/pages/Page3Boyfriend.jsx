@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const NAME = 'ino'
 
@@ -16,7 +16,6 @@ const WORDS = [
   { text: 'charming', good: true },
   { text: 'annoying', good: false },
   { text: 'caring', good: true },
-  { text: 'ugly', good: false },
   { text: 'strong', good: true },
   { text: 'boring', good: false },
   { text: 'sweet', good: true },
@@ -60,6 +59,15 @@ export default function Page3Boyfriend({ onAdvance }) {
       setWordMsg('Not even close, you dumb cat, pick more')
     }
   }
+
+  const checkWordsRef = useRef(null)
+  checkWordsRef.current = checkWords
+  useEffect(() => {
+    if (step !== 'words') return
+    const onKey = (e) => { if (e.key === 'Enter') checkWordsRef.current() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [step])
 
   if (step === 'name') {
     return (
