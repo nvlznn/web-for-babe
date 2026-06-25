@@ -38,16 +38,16 @@ export default function Page2WhichOne({ onAdvance }) {
     if (selected.length === CATS.length) {
       setSolved(true)
     } else if (!multiSelect) {
-      setNudge("hmm… are you sure that's the only one? 👀 (psst, look at the title)")
+      setNudge("Hmm… Are you sure that's the only one? (you stupid cat, look at the title)")
     } else {
-      setNudge('not quite! pick ALL of them, every single stupid cat 🐱')
+      setNudge('Not quite! Pick ALL of them, every single stupid cat 🐱')
     }
   }
 
   return (
     <section className="page">
       <h1 className="page-title">
-        which{' '}
+        Which{' '}
         <span
           className={`magic-word ${oneChanged ? 'used' : ''}`}
           onClick={() => setOneChanged(true)}
@@ -64,8 +64,8 @@ export default function Page2WhichOne({ onAdvance }) {
       </h1>
       <p className="page-sub">
         {multiSelect
-          ? 'now pick every cat that is you 🐾'
-          : 'pick the one that is you 🐾'}
+          ? 'Now pick every cat that is you 🐾'
+          : 'Pick the one that looks like you 🐾'}
       </p>
 
       <div className="cat-grid">
@@ -73,7 +73,7 @@ export default function Page2WhichOne({ onAdvance }) {
           const on = selected.includes(idx)
           return (
             <div key={file} className={`cat-card ${on ? 'selected' : ''}`}>
-              <div className="cat-img-wrap">
+              <div className="cat-img-wrap" onClick={() => toggle(idx)} style={{ cursor: 'pointer' }}>
                 <img src={`/materials/stupid-cats/${file}`} alt="a stupid cat" />
                 {on && <span className="cat-badge">💖</span>}
               </div>
@@ -97,7 +97,7 @@ export default function Page2WhichOne({ onAdvance }) {
       {solved && (
         <Card
           emoji="🥰"
-          text="congrats again, my little kitty"
+          text="Congrats again, my little kitty"
           onContinue={onAdvance}
         />
       )}

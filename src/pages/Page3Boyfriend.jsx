@@ -37,7 +37,7 @@ export default function Page3Boyfriend({ onAdvance }) {
     if (name.trim().toLowerCase() === NAME) {
       setStep('words')
     } else {
-      setNameMsg("hmm, that's not him 🤔 try again, you know his name 💗")
+      setNameMsg("Hmm, that's not me 🤔 Try again, you know my name")
     }
   }
 
@@ -55,17 +55,17 @@ export default function Page3Boyfriend({ onAdvance }) {
     if (allGoodPicked && noBadPicked) {
       onAdvance()
     } else if (!noBadPicked) {
-      setWordMsg('hey! that word does NOT suit him 😾 unpick the bad ones!')
+      setWordMsg('Hey! That word does NOT suit me 😾 Unpick the bad ones!')
     } else {
-      setWordMsg('aww, you missed some! he deserves ALL the good words 💕')
+      setWordMsg('Aww, you missed some! He deserves ALL the good words 💕')
     }
   }
 
   if (step === 'name') {
     return (
       <section className="page">
-        <h1 className="page-title">who is your handsome boyfriend? 😎</h1>
-        <p className="page-sub">now, enter your boyfriend's name</p>
+        <h1 className="page-title">Who is your handsome boyfriend? 😎</h1>
+        <p className="page-sub">Now, enter your boyfriend's name</p>
         <form className="input-row" onSubmit={submitName}>
           <input
             className="cute-input"
@@ -76,7 +76,7 @@ export default function Page3Boyfriend({ onAdvance }) {
             onChange={(e) => setName(e.target.value)}
           />
           <button className="btn" type="submit">
-            that's him 💗
+            That's him 💗
           </button>
         </form>
         {nameMsg && <p className="feedback">{nameMsg}</p>}
@@ -86,9 +86,9 @@ export default function Page3Boyfriend({ onAdvance }) {
 
   return (
     <section className="page">
-      <h1 className="page-title">find all words suit him 💝</h1>
+      <h1 className="page-title">Find all words that suit me</h1>
       <p className="page-sub">
-        pick every word that suits Ino — and don't you dare pick a mean one 😼
+        Pick every word that suits me — and don't you dare pick a mean one 😼
       </p>
 
       <div className="word-grid">
@@ -109,7 +109,7 @@ export default function Page3Boyfriend({ onAdvance }) {
       {wordMsg && <p className="feedback">{wordMsg}</p>}
 
       <button className="btn" onClick={checkWords}>
-        these all suit him! 💗
+        These all suit him!
       </button>
     </section>
   )

@@ -4,10 +4,10 @@ import Card from '../components/Card.jsx'
 const ANSWER = 'silly little kat'
 
 const WRONG_MESSAGES = [
-  'Not what I want! try again!',
+  'Not what I want! Try again!',
   "Let me give you a hint: 你是一個笨蛋小貓",
-  'Awwww, the answer is still wrong, you silly little kat! try again',
-  'I think it\' too hard for you, the answer is "silly little kat" :)',
+  'You stupid, the answer is still wrong, you ARE a silly little kat! Try again',
+  'I think it\'s too hard for you, the answer is "silly little kat" :)',
 ]
 
 // .trim() removes whitespace from both ends of a string
@@ -44,12 +44,12 @@ export default function Page1WhoAreYou({ onAdvance }) {
           type="text"
           value={value}
           autoFocus
-          placeholder="type your answer here..."
+          placeholder="Type your answer here..."
           // `.target` will give you the element that triggered the event
           onChange={(e) => setValue(e.target.value)}
         />
         <button className="btn" type="submit">
-          submit 💗
+          Submit 💗
         </button>
       </form>
       {feedback && <p className="feedback">{feedback}</p>}

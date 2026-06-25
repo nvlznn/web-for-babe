@@ -78,7 +78,7 @@ export default function Page5Ending() {
         <img src="/materials/us.JPG" alt="us together 💗" />
       </div>
 
-      <p className="page-sub">forever &amp; always, your stupid cute little kat &amp; her Ino 🐱💍</p>
+      <p className="page-sub">Forever &amp; always, your stupid cute little kat &amp; her Ino 🐱💍</p>
     </section>
   )
 }
