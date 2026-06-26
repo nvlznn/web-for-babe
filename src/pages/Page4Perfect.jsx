@@ -6,7 +6,7 @@ export default function Page4Perfect({ onAdvance }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   const noBtnRef = useRef(null)
   const offsetRef = useRef({ x: 0, y: 0 })
-  const lastCursorRef = useRef({ x: null, y: null })
+  const cursorRef = useRef({ x: null, y: null })
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Enter') onAdvance() }
@@ -14,59 +14,64 @@ export default function Page4Perfect({ onAdvance }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [onAdvance])
 
-  // spring: every frame, pull the button 3% closer to origin
   useEffect(() => {
     let raf
     const tick = () => {
       const { x, y } = offsetRef.current
-      if (Math.abs(x) > 0.5 || Math.abs(y) > 0.5) {
-        const nx = Math.abs(x) < 0.5 ? 0 : x * 0.97
-        const ny = Math.abs(y) < 0.5 ? 0 : y * 0.97
+      const cursor = cursorRef.current
+      const btn = noBtnRef.current
+
+      let nx = x
+      let ny = y
+
+      if (cursor.x !== null && btn) {
+        const r = btn.getBoundingClientRect()
+        const bx = r.left + r.width / 2
+        const by = r.top + r.height / 2
+        const dx = bx - cursor.x
+        const dy = by - cursor.y
+        const dist = Math.hypot(dx, dy)
+
+        if (dist < DODGE_RADIUS) {
+          // too close — push away regardless of whether cursor is moving
+          const angle = Math.atan2(dy, dx)
+          const push = Math.max((DODGE_RADIUS - dist) * 0.22, 6)
+          nx = x + Math.cos(angle) * push
+          ny = y + Math.sin(angle) * push
+        } else {
+          // safe — spring toward origin
+          nx = Math.abs(x) < 0.5 ? 0 : x * 0.97
+          ny = Math.abs(y) < 0.5 ? 0 : y * 0.97
+        }
+      } else {
+        nx = Math.abs(x) < 0.5 ? 0 : x * 0.97
+        ny = Math.abs(y) < 0.5 ? 0 : y * 0.97
+      }
+
+      const maxX = window.innerWidth / 2 - 80
+      const maxY = window.innerHeight / 2 - 80
+      nx = Math.max(-maxX, Math.min(maxX, nx))
+      ny = Math.max(-maxY, Math.min(maxY, ny))
+
+      if (Math.abs(nx - x) > 0.1 || Math.abs(ny - y) > 0.1) {
         offsetRef.current = { x: nx, y: ny }
         setOffset({ x: nx, y: ny })
       }
+
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
   }, [])
 
-  const runAway = (clientX, clientY) => {
-    const btn = noBtnRef.current
-    if (!btn) return
-    const r = btn.getBoundingClientRect()
-    const cx = r.left + r.width / 2
-    const cy = r.top + r.height / 2
-    const dx = cx - clientX
-    const dy = cy - clientY
-    const dist = Math.hypot(dx, dy)
-
-    if (dist > DODGE_RADIUS) {
-      lastCursorRef.current = { x: null, y: null }
-      return
-    }
-
-    const last = lastCursorRef.current
-    let step = 12
-    if (last.x !== null) {
-      step = Math.max(Math.hypot(clientX - last.x, clientY - last.y) * 1.5, 12)
-    }
-    lastCursorRef.current = { x: clientX, y: clientY }
-
-    const angle = Math.atan2(dy, dx)
-    const maxX = window.innerWidth / 2 - 80
-    const maxY = window.innerHeight / 2 - 80
-    const nx = Math.max(-maxX, Math.min(maxX, offsetRef.current.x + Math.cos(angle) * step))
-    const ny = Math.max(-maxY, Math.min(maxY, offsetRef.current.y + Math.sin(angle) * step))
-
-    offsetRef.current = { x: nx, y: ny }
-    setOffset({ x: nx, y: ny })
+  const trackCursor = (clientX, clientY) => {
+    cursorRef.current = { x: clientX, y: clientY }
   }
 
   return (
     <section
       className="page"
-      onPointerMove={(e) => runAway(e.clientX, e.clientY)}
+      onPointerMove={(e) => trackCursor(e.clientX, e.clientY)}
     >
       <h1 className="page-title">I am so perfect, aren't I?</h1>
       <p className="page-sub">Just tell the truth</p>
@@ -81,7 +86,7 @@ export default function Page4Perfect({ onAdvance }) {
           style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
           onPointerDown={(e) => {
             e.preventDefault()
-            runAway(e.clientX, e.clientY)
+            trackCursor(e.clientX, e.clientY)
           }}
         >
           No
